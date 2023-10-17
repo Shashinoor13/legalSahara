@@ -1,4 +1,13 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+    // experimental: true,
+    experimental: {
+      serverActions: true,
+    },
+    images: {
+        domains: ['example.com','dummyimage.com','cdn.sanity.io'],
+      },
+      
+}
 
 module.exports = nextConfig
