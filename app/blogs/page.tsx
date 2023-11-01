@@ -39,7 +39,7 @@ export default async function Home() {
                         </h1>
                         <div>
                             {
-                                project.content[0].children[0].text.toString().substring(0, 100)
+                                <PortableText value={project.content} />
                             }
                         </div>
                         <div className="flex items-center flex-wrap ">

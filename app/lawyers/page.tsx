@@ -4,11 +4,8 @@ import { getLawyers, searchLawyers } from "@/sanity/sanity-utils";
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/nav-bar";
 
-type Props = {
-  lawyers: any;
-};
 
-export default function Lawyers({ lawyers }: Props) {
+export default function Lawyers() {
   const [lawyer, setLawyer] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 

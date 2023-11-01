@@ -38,7 +38,7 @@ export default async function RecentBlogs() {
                           {project.name}
                         </h1>
                         <div className="leading-relaxed mb-3">
-                        {project.content[0].children[0].text.toString().substring(0, 100)}
+                            <PortableText value={project.content} />
                         </div>
                         <div className="flex items-center flex-wrap ">
                           <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
