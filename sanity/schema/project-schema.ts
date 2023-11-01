@@ -4,6 +4,21 @@ const project = {
     type : 'document',
     fields: [
         {
+            name: 'author',
+            title: 'Author',
+            type: 'string',
+            description: 'Name of the author',
+            default: 'Renisha Ghimire',
+        },
+        {
+            name:'authorImage',
+            title:'Author Image',
+            type:'string',
+            options:{
+                hotspot:true,
+            }
+        },
+        {
             name : 'name',
             title: 'Name',
             type : 'string',
