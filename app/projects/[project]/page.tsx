@@ -47,13 +47,21 @@ export default async function Project({params}:Props){
                 </div>
             </div>
             <Form _id={project._id}/>
+            
             <div className="container px-5 py-24 mx-auto flex flex-col">
-        
+            <h2>
+                Comments
+            </h2>
         {
             comments.map((comment:any) => (
-                <div className="flex flex-col py-4" key={comment._id}>
-                    <h3 className="text-2xl font-medium title-font text-gray-900">{comment.name}</h3>
-                    <p className="leading-relaxed text-lg mb-4">{comment.comment}</p>
+                <div className="py-4" key={comment._id}>
+                    <div className="bg-gray-100 mb-1 p-5 rounded-md" >
+                        <h1 className="text-xl font-regular title-font text-gray-900">{comment.name}</h1>
+                        <h2 className="text-md font-light title-font text-gray-400">{comment.email}</h2>
+                        <div className="leading-relaxed text-lg">
+                            {comment.comment}
+                        </div>
+                    </div>
                 </div>
             ))
         }

@@ -20,25 +20,25 @@ const navigation = [
 
 export default function Navbar() {
   return (
-    <Disclosure as="nav" className="bg-white-50 shadow-sm">
+    <Disclosure as="nav" className="bg-red z1 shadow-sm">
       {({ open }) => (
         <>
-          <div className="max-w-7xl mx-auto px-8 lg:px-12">
+          <div className="max-w-7xl mx-auto px-8 lg:px-12 bg-transparent">
             <div className="flex justify-between h-20">
               <div className="flex items-center">
-                <span>
+                <span className='mr-5'>
                   <Image
                     src="/legalSahara.svg"
-                    alt="Robin Vriens Logo"
-                    width={200}
-                    height={200}
+                    alt="Legal Sahara Logo"
+                    width={100}
+                    height={100}
                   />
                 </span>
 
-                <div className=" hidden md:flex  pl-8">
+                <div className=" hidden md:flex flex flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400">
                   {navigation.map(({ name, href }) => (
                     <Link legacyBehavior href={href} key={name}>
-                      <button type='button' className='text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700'>
+                      <button type='button' className='inline-block p-4 text-gray-600 rounded bg-gray-50 active dark:bg-white-800 dark:text-gray-500 mx-1'>
                       <a>
                         <span>{name}</span>
                       </a>
