@@ -10,12 +10,6 @@ export default async function Home() {
     <>
     <Navbar/>
     <div className="container">
-      {/* <h1 className="text-7xl font-extrabold">
-        Hello, My Name is{" "}
-        <span className="bg-gradient-to-r from-orange-400 via-red-500 to-purple-600 bg-clip-text text-transparent">
-          Renisha
-        </span>
-      </h1> */}
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-wrap -m-4">
