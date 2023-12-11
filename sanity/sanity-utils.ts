@@ -6,6 +6,7 @@ export async function getProjects() : Promise<Project[]>{
         projectId: 's29n91p9',
         dataset: 'production',
         apiVersion: '2023-09-09',
+        useCdn: false,
     });
 
 

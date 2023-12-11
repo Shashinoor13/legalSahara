@@ -13,14 +13,14 @@ export default async function RecentBlogs() {
         <>
         <div className="container px-5 pt-10 mx-auto" id='recent-blogs'>
             <div className="flex flex-col text-center w-full mb-20">
-                <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Recent Blogs</h1>
+                <h1 className="sm:text-3xl  font-large title-font mb-4 text-gray-900">Recent Blogs</h1>
             </div>
         </div>
         <section className="text-gray-600 body-font">
         <div className="container px-5 py-5 mx-auto">
           <div className="flex flex-wrap">
             {topBlogs.map((project) => (
-                <div className="p-4 md:w-1/3" key={project._id}>
+                <div className="p-4 md:w-1/3 cursor-default hover:shadow-md  hover:scale-105 transition-all duration-150 py-10 max-w-full" key={project._id}>
                 <Link legacyBehavior id={project._id} href={`/projects/${project.slug}`} >
                     <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                       <Image
@@ -32,12 +32,13 @@ export default async function RecentBlogs() {
                         />
                       <div className="p-6">
                         <h2 className="tracking-widest text-xs title-font font-medium text-gray-500 mb-1">
-                         {project._createdAt}
+                         {/* {project._createdAt} */}
+                         {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: '2-digit' }).format(new Date(project._createdAt))}
                         </h2>
                         <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
                           {project.name}
                         </h1>
-                        <div className="leading-relaxed mb-3">
+                        <div className="leading-relaxed mb-3 h-20 overflow-clip">
                             <PortableText value={project.content} />
                         </div>
                         <div className="flex items-center flex-wrap ">
