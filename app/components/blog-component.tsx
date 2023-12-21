@@ -12,9 +12,8 @@ interface Blog {
     _id: string;
     }
 
-export default function BlogDetail(project:Blog) {
+export default function BlogDetail(project:Blog,key:any) {
     return (
-        <>
         <div className="p-4 md:w-1/3 cursor-default transition-all duration-150 py-10 max-w-full" key={project._id}>
                 <Link legacyBehavior id={project._id} href={`/projects/${project.slug}`} >
                     <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-150">
@@ -57,6 +56,5 @@ export default function BlogDetail(project:Blog) {
                     </div>
                 </Link>
               </div>
-        </>
     )
 }

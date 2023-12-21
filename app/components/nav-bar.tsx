@@ -35,7 +35,7 @@ export default function Navbar() {
                   />
                 </span>
 
-                <div className=" hidden md:flex flex flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+                <div className="hidden md:flex  flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400">
                   {navigation.map(({ name, href }) => (
                     <Link legacyBehavior href={href} key={name}>
                       <button type='button' className='inline-block p-4 text-gray-600 rounded bg-gray-50 active dark:bg-white-800 dark:text-gray-500 mx-1'>
