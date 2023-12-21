@@ -80,6 +80,7 @@ export async function getComments(_id:String){
         projectId: 's29n91p9',
         dataset: 'production',
         apiVersion: '2023-09-09',
+        useCdn: false,
     });
 
     const data = await client.fetch(
