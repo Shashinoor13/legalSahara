@@ -32,8 +32,9 @@ export async function GET(req: Request, res: Response) {
         },
     });
 
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    console.log(baseUrl, gmail_account);
     // Generate HTML email content
     const generateHtmlEmail = (news: any[], blogs: any[]) => {
         const newsItems = news
