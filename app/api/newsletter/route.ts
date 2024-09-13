@@ -88,6 +88,17 @@ export async function GET(req: Request, res: Response) {
         `;
     };
 
+    await new Promise((resolve, reject) => {
+        transporter.verify(function (error: any, success: any) {
+            if (error) {
+                console.log(error);
+                reject(error);
+            } else {
+                console.log("Server is ready to take our messages");
+                resolve(success);
+            }
+        });
+    });
 
     // Iterate over subscribed emails and send an email to each
     for (const subscriber of _subscribed) {
@@ -100,19 +111,18 @@ export async function GET(req: Request, res: Response) {
             html: emailContent,
         };
 
-        // Send the email
-        transporter.sendMail(mailOptions, function (error: any, info: { response: string; }) {
-            if (error) {
-                console.log(`Error sending to ${subscriber.email}: `, error);
-            } else {
-                console.log(`Email sent to ${subscriber.email}: ` + info.response);
-            }
+        await new Promise((resolve, reject) => {
+            transporter.sendMail(mailOptions, function (error: any, info: any) {
+                if (error) {
+                    console.log(error);
+                    reject(error);
+                } else {
+                    console.log("Email sent: " + info.response);
+                    resolve(info);
+                }
+            });
         });
     }
 
-    return new Response(JSON.stringify({ news: topNews, blogs: topBlogs, emails: _subscribed }), {
-        headers: {
-            "content-type": "application/json",
-        },
-    });
+    return new Response("Emails sent successfully", { status: 200 });
 }
