@@ -50,7 +50,7 @@ export default function LawyerRegistration() {
             image: undefined,
         },
     });
-    const onSubmit = async (data: { name: any; email: any; phoneNumber: any; specialization: any; experience: any; bio: any; image: any; }) => {
+    const onSubmit = async (data: { name: any; email: any; phoneNumber: any; specialization: any; experience: any; bio: any; image?: any; }) => {
         try {
             const { name, email, phoneNumber, specialization, experience, bio, image } = data;
             const result = await registerLawyer(name, email, phoneNumber, specialization, experience, bio, image);
