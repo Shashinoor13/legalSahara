@@ -210,6 +210,7 @@ export async function getNews() {
         projectId: 's29n91p9',
         dataset: 'production',
         apiVersion: '2023-09-09',
+        token: 'skueztx7acaprBGqUAYsPkWpkhWvVbwdhvMjzasK7fhvoN6pIdeMNUL3GMaNjIOumYqdX5aGxv7YSOUVaPO7WDxCYDDiP8arHamYCyB68cKxbluUYPVCJuN92sPg183bq9e3aDjX85kyNOveaMoBZdOpwhw2Y1T41UvUzbcni38rhSl1HAL1'
     });
 
     const data = await client.fetch(
@@ -224,4 +225,60 @@ export async function getNews() {
         }`
     );
     return data;
+}
+
+export async function addEmailToNewsletter(email: string) {
+    const client = createClient({
+        projectId: 's29n91p9',
+        dataset: 'production',
+        apiVersion: '2023-09-09',
+        token: 'skueztx7acaprBGqUAYsPkWpkhWvVbwdhvMjzasK7fhvoN6pIdeMNUL3GMaNjIOumYqdX5aGxv7YSOUVaPO7WDxCYDDiP8arHamYCyB68cKxbluUYPVCJuN92sPg183bq9e3aDjX85kyNOveaMoBZdOpwhw2Y1T41UvUzbcni38rhSl1HAL1'
+    });
+
+    const data = await client.create({
+        _type: 'newsletter',
+        email,
+    });
+    return data;
+}
+
+
+export async function getSubscribedEmails() {
+    const client = createClient({
+        projectId: 's29n91p9',
+        dataset: 'production',
+        apiVersion: '2023-09-09',
+        useCdn: false,
+    });
+
+    const data = await client.fetch(
+        groq`*[_type == "newsletter"]{
+            _id,
+            email,
+        }`
+    );
+    return data;
+}
+
+export async function unsubscribeEmail(email: string) {
+    const client = createClient({
+        projectId: 's29n91p9',
+        dataset: 'production',
+        apiVersion: '2023-09-09',
+        token: 'skueztx7acaprBGqUAYsPkWpkhWvVbwdhvMjzasK7fhvoN6pIdeMNUL3GMaNjIOumYqdX5aGxv7YSOUVaPO7WDxCYDDiP8arHamYCyB68cKxbluUYPVCJuN92sPg183bq9e3aDjX85kyNOveaMoBZdOpwhw2Y1T41UvUzbcni38rhSl1HAL1'
+    });
+
+    const data = await client.fetch(
+        groq`*[_type == "newsletter" && email == $email]{
+            _id,
+            email,
+        }`, { email }
+    );
+
+    if (data.length === 0) {
+        return { message: "Email not found" };
+    }
+
+    await client.delete(data[0]._id);
+    return { message: "Email unsubscribed successfully" };
 }

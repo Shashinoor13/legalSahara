@@ -25,7 +25,6 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         {children}
-        <Toaster />
       </body>
     </html>
   );

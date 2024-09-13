@@ -1,10 +1,33 @@
 'use client'
 
+import { addEmailToNewsletter } from "@/sanity/sanity-utils";
 import { MailIcon } from "@heroicons/react/solid";
 import React from "react";
+import { toast } from "sonner";
 
 
 export function Jumbotron() {
+
+
+    const _addEmailToNewsletter = async (email: string) => {
+        try {
+            const response = await addEmailToNewsletter(email);
+            return;
+
+        } catch (error) {
+            console.error('An error occurred while adding email to newsletter', error);
+            toast.error('An error occurred. Please try again later');
+        }
+    }
+
+    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const email = (e.currentTarget.elements[0] as HTMLInputElement).value;
+        _addEmailToNewsletter(email);
+        toast.success("You have successfully subscribed to our newsletter");
+        toggleModal();
+    }
+
 
     const [isModalOpen, setIsModalOpen] = React.useState(false);
 
@@ -25,10 +48,6 @@ export function Jumbotron() {
         };
     }, [ref]);
 
-    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        console.log('Form Submitted');
-    }
 
 
 
