@@ -26,13 +26,13 @@ export async function GET(req: NextRequest, res: NextResponse) {
     const gmail_account = process.env.NEXT_PUBLIC_GMAIL_ACCOUNT;
     const gmail_pass = process.env.NEXT_PUBLIC_GMAIL_PASSWORD;
 
-    const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            user: gmail_account,
-            pass: gmail_pass,
-        },
-    });
+    // const transporter = nodemailer.createTransport({
+    //     service: "gmail",
+    //     auth: {
+    //         user: gmail_account,
+    //         pass: gmail_pass,
+    //     },
+    // });
 
 
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
@@ -89,17 +89,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
         `;
     };
 
-    await new Promise((resolve, reject) => {
-        transporter.verify(function (error: any, success: any) {
-            if (error) {
-                console.log(error);
-                reject(error);
-            } else {
-                console.log("Server is ready to take our messages");
-                resolve(success);
-            }
-        });
-    });
 
     // Iterate over subscribed emails and send an email to each
     for (const subscriber of _subscribed) {
@@ -113,12 +102,13 @@ export async function GET(req: NextRequest, res: NextResponse) {
         };
 
         try {
-            await transporter.sendMail({
-                from: 'me@me.com',
-                to: subscriber.email,
-                subject: "Top 3 News and Blogs",
-                html: emailContent,
-            });
+            await nodemailer.createTransport({
+                service: "gmail",
+                auth: {
+                    user: gmail_account,
+                    pass: gmail_pass,
+                },
+            }).sendMail(mailOptions);
             console.log('Email sent to ' + subscriber.email);
         } catch (e) {
             console.error('Error sending email to ' + subscriber.email, e);
