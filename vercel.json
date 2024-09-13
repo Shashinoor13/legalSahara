@@ -1,9 +1,0 @@
-{
-    "crons": [
-        {
-            "name": "every-5-minutes",
-            "path": "/api/cron",
-            "schedule": "*/1 * * * *"
-        }
-    ]
-}
