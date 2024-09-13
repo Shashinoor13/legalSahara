@@ -5,16 +5,18 @@ import { Services } from '../components/services-section';
 import { ContactForm } from '../components/contact-form';
 import Navbar from '../components/nav-bar';
 import Footer from '../components/footer';
+import NewsList from '../components/news-component';
 
 const LandingPage: React.FC = () => {
     return (
         <>
-        <Navbar />
-        <Jumbotron />
-        <Services />
-        <RecentBlogs />
-        <ContactForm/>
-        <Footer/>
+            <Navbar />
+            <Jumbotron />
+            <RecentBlogs />
+            <NewsList />
+            <Services />
+            <ContactForm />
+            <Footer />
         </>
     );
 };

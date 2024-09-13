@@ -1,7 +1,7 @@
 import { Project } from "@/types/project";
 import { createClient, groq } from "next-sanity";
 
-export async function getProjects() : Promise<Project[]>{
+export async function getProjects(): Promise<Project[]> {
     const client = createClient({
         projectId: 's29n91p9',
         dataset: 'production',
@@ -10,7 +10,7 @@ export async function getProjects() : Promise<Project[]>{
     });
 
 
-        const data =  client.fetch(
+    const data = client.fetch(
         groq`*[_type == "project"]{
             _id,
             _createdAt,
@@ -26,7 +26,7 @@ export async function getProjects() : Promise<Project[]>{
     return data;
 }
 
-export async function getProject(slug:string) : Promise<Project>{
+export async function getProject(slug: string): Promise<Project> {
     const client = createClient({
         projectId: 's29n91p9',
         dataset: 'production',
@@ -34,7 +34,7 @@ export async function getProject(slug:string) : Promise<Project>{
     });
 
 
-        
+
     return client.fetch(
         groq`*[_type == "project" && slug.current == $slug][0]{
             _id,
@@ -46,17 +46,17 @@ export async function getProject(slug:string) : Promise<Project>{
             content,
             author,
             authorImage,
-        }`,{slug}
+        }`, { slug }
     );
 }
 
-export async function createComment(name:String,email:String,comment:String,_id:String){
+export async function createComment(name: String, email: String, comment: String, _id: String) {
     console.log("Creating comment", name, email, comment, _id);
     const client = createClient({
         projectId: 's29n91p9',
         dataset: 'production',
         apiVersion: '2023-09-09',
-        token:"skueztx7acaprBGqUAYsPkWpkhWvVbwdhvMjzasK7fhvoN6pIdeMNUL3GMaNjIOumYqdX5aGxv7YSOUVaPO7WDxCYDDiP8arHamYCyB68cKxbluUYPVCJuN92sPg183bq9e3aDjX85kyNOveaMoBZdOpwhw2Y1T41UvUzbcni38rhSl1HAL1",
+        token: "skueztx7acaprBGqUAYsPkWpkhWvVbwdhvMjzasK7fhvoN6pIdeMNUL3GMaNjIOumYqdX5aGxv7YSOUVaPO7WDxCYDDiP8arHamYCyB68cKxbluUYPVCJuN92sPg183bq9e3aDjX85kyNOveaMoBZdOpwhw2Y1T41UvUzbcni38rhSl1HAL1",
     });
 
     const data = await client.create({
@@ -64,18 +64,18 @@ export async function createComment(name:String,email:String,comment:String,_id:
         name,
         email,
         comment,
-        post:{
-            _type:"reference",
-            _ref:_id
+        post: {
+            _type: "reference",
+            _ref: _id
         }
     });
 
     console.log(data);
     return data;
-        
+
 }
 
-export async function getComments(_id:String){
+export async function getComments(_id: String) {
     const client = createClient({
         projectId: 's29n91p9',
         dataset: 'production',
@@ -90,14 +90,14 @@ export async function getComments(_id:String){
             name,
             email,
             comment,
-        }`,{id:_id}
+        }`, { id: _id }
     );
 
     console.log(data);
     return data;
 }
 
-export async function getLawyers(){
+export async function getLawyers() {
     const client = createClient({
         projectId: 's29n91p9',
         dataset: 'production',
@@ -105,7 +105,7 @@ export async function getLawyers(){
     });
 
     const data = await client.fetch(
-        groq`*[_type == "lawyer"]{
+        groq`*[_type == "lawyer" && approved]{
             _id,
             _createdAt,
             name,
@@ -120,7 +120,7 @@ export async function getLawyers(){
     return data;
 }
 
-export async function getLawyer(slug:string){
+export async function getLawyer(slug: string) {
     const client = createClient({
         projectId: 's29n91p9',
         dataset: 'production',
@@ -138,12 +138,12 @@ export async function getLawyer(slug:string){
             "slug": slug.current,
             "image": image.asset->url,
             position,
-        }`,{slug}
+        }`, { slug }
     );
     return data;
 }
 
-export async function searchLawyers(query:string){
+export async function searchLawyers(query: string) {
     const client = createClient({
         projectId: 's29n91p9',
         dataset: 'production',
@@ -161,7 +161,67 @@ export async function searchLawyers(query:string){
             "slug": slug.current,
             "image": image.asset->url,
             position,
-        }`,{query}
+        }`, { query }
+    );
+    return data;
+}
+
+
+export async function registerLawyer(name: string, email: string, phone: string, specialization: string, experience: number, bio: string, image: File) {
+    const client = createClient({
+        projectId: 's29n91p9',
+        dataset: 'production',
+        apiVersion: '2023-09-09',
+        token: "skueztx7acaprBGqUAYsPkWpkhWvVbwdhvMjzasK7fhvoN6pIdeMNUL3GMaNjIOumYqdX5aGxv7YSOUVaPO7WDxCYDDiP8arHamYCyB68cKxbluUYPVCJuN92sPg183bq9e3aDjX85kyNOveaMoBZdOpwhw2Y1T41UvUzbcni38rhSl1HAL1",
+        useCdn: false,
+    });
+
+    // Upload the image
+    const imageAsset = await client.assets.upload('image', image, {
+        filename: image.name,
+        contentType: image.type,
+    });
+
+    const data = await client.create({
+        _type: 'lawyer',
+        name,
+        email,
+        phone,
+        bio,
+        specialization,
+        experience,
+        image: {
+            _type: 'image',
+            asset: {
+                _type: 'reference',
+                _ref: imageAsset._id,
+            },
+        },
+        approved: false,
+        position: "Lawyer",
+    });
+
+    console.log(data);
+    return data;
+}
+
+export async function getNews() {
+    const client = createClient({
+        projectId: 's29n91p9',
+        dataset: 'production',
+        apiVersion: '2023-09-09',
+    });
+
+    const data = await client.fetch(
+        groq`*[_type == "news"]{
+            _id,
+            _createdAt,
+            title,
+            description,
+            link,
+            "slug": slug.current,
+            "image": image.asset->url,
+        }`
     );
     return data;
 }

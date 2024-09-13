@@ -13,14 +13,14 @@ import {
 
 const navigation = [
   { name: 'Home', href: '/homepage' },
-  { name: 'Blogs', href: '/blogs' },
   { name: 'About Us', href: '/about' },
-  { name: 'Lawyers', href:'/lawyers'}
+  { name: 'Blogs', href: '/blogs' },
+  { name: 'Lawyers', href: '/lawyers' }
 ];
 
 export default function Navbar() {
   return (
-    <Disclosure as="nav" className="bg-red z1 shadow-sm">
+    <Disclosure as="nav" className="bg-gradient-to-b from-blue-100 to-white z1 shadow-sm">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-8 lg:px-12 bg-transparent">
@@ -28,27 +28,27 @@ export default function Navbar() {
               <div className="flex items-center">
                 <span className='mr-5'>
                   <Image
-                    src="/legalSahara.svg"
-                    alt="Legal Sahara Logo"
+                    src="/image-invert.png"
+                    alt="Legal Shrot Logo"
                     width={100}
                     height={100}
                   />
                 </span>
 
-                <div className="hidden md:flex  flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+                <div className=" hidden md:flex  flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400">
                   {navigation.map(({ name, href }) => (
                     <Link legacyBehavior href={href} key={name}>
-                      <button type='button' className='inline-block p-4 text-gray-600 rounded bg-gray-50 active dark:bg-white-800 dark:text-gray-500 mx-1'>
-                      <a>
-                        <span>{name}</span>
-                      </a>
+                      <button type='button' className='inline-block p-4 text-gray-600 rounded active dark:bg-white-800 dark:text-gray-500 mx-1 hover:text-gray-800'>
+                        <a>
+                          <span>{name}</span>
+                        </a>
                       </button>
                     </Link>
                   ))}
                 </div>
               </div>
 
-              <div className="flex">
+              <div className=" flex">
                 <div className="flex items-center md:hidden">
                   <Disclosure.Button className="inline-flex items-center justify-center rounded-md text-zinc-400 hover:text-zinc-600 duration-300">
                     <span className="sr-only">Open main menu</span>

@@ -1,8 +1,9 @@
-
 import { Form } from "@/app/components/comment-form";
 import Navbar from "@/app/components/nav-bar";
 import { getComments, getProject } from "@/sanity/sanity-utils";
 import { PortableText } from "@portabletext/react";
+import Image from "next/image";
+import { UserCircle, Calendar, MessageCircle } from "lucide-react";
 
 type Props = {
     params: {
@@ -10,71 +11,66 @@ type Props = {
     }
 }
 
-export default async function Project({params}:Props){
+export default async function Project({ params }: Props) {
     const slug = params.project;
     const project = await getProject(slug);
     const comments = await getComments(project._id);
-    return (
-    <>
-    <Navbar />
-        <section className="text-gray-600 body-font py-10">
-        <div className="container px-5 py-20 mx-auto flex flex-col">
-            <div className="lg:w-4/6 mx-auto">
-            <div className="rounded-lg h-full overflow-hidden flex-grow">
-                <div>
-                    <h1 className="text-3xl font-medium title-font text-gray-900">{project?.name}</h1>
-                </div>
-                
-               
-            </div>
-            <div className="flex flex-col items-center text-center justify-center mb-5">
-                <div className="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400">
-                    <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-10 h-10" viewBox="0 0 24 24">
-                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                </div>
-                {/*@ts-ignore */}
-                    <h2 className="font-medium title-font mt-4 text-gray-900 text-lg">{project.author}</h2>
-                    <div className="w-12 h-1 bg-indigo-500 rounded mt-2 mb-4"></div>
-                </div>
-            <img alt="image" className="lg:w-4/6 mx-auto w-full object-cover object-center rounded" src={project.image} />
-            <div>
 
-            </div>
-            <div className="flex flex-row  mt-20">
-                <div className="sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
-                <div className="leading-relaxed text-lg mb-4">
-                    <PortableText value={project.content} />
-                </div>
-                </div>
-            </div>
-            <Form _id={project._id}/>
-            
-            <div className="container px-5 py-24 mx-auto flex flex-col">
-            <h2 className="text-4xl font-extrabold">
-                Comments
-            </h2>
-        {
-            comments.map((comment:any) => (
-                <div className="py-4" key={comment._id}>
-                    <div className="bg-gray-100 mb-1 p-5 rounded-md" >
-                        <h1 className="text-xl font-regular title-font text-gray-900">{comment.name}</h1>
-                        <h2 className="text-md font-light title-font text-gray-400">{comment.email}</h2>
-                        <div className="leading-relaxed text-lg">
-                            {comment.comment}
+    return (
+        <div className="min-h-screen bg-gray-100">
+            <Navbar />
+            <main className="container mx-auto px-4 py-8">
+                <article className="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <div className="relative h-64 md:h-96">
+                        <Image
+                            src={project.image}
+                            alt={project.name}
+                            layout="fill"
+                            objectFit="cover"
+                            className="transition-transform duration-300 hover:scale-105"
+                        />
+                    </div>
+                    <div className="p-6 md:p-8">
+                        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{project.name}</h1>
+                        <div className="flex items-center mb-6">
+                            <UserCircle className="w-6 h-6 text-gray-500 mr-2" />
+                            <span className="text-gray-600 font-medium">{project.author.toString()}</span>
+                            <span className="mx-2 text-gray-300">|</span>
+                            <Calendar className="w-5 h-5 text-gray-500 mr-2" />
+                            <span className="text-gray-600">
+                                {new Date(project._createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                            </span>
+                        </div>
+                        <div className="prose max-w-none">
+                            <PortableText value={project.content} />
                         </div>
                     </div>
-                </div>
-            ))
-        }
+                </article>
+
+                <section className="mt-12">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <MessageCircle className="w-6 h-6 mr-2" />
+                        Comments ({comments.length})
+                    </h2>
+                    <Form _id={project._id} />
+                    <div className="space-y-6 mt-8">
+                        {comments.map((comment: any) => (
+                            <div key={comment._id} className="bg-white p-6 rounded-lg shadow">
+                                <div className="flex items-center mb-4">
+                                    <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center mr-3">
+                                        <span className="text-indigo-500 font-semibold">{comment.name.charAt(0).toUpperCase()}</span>
+                                    </div>
+                                    <div>
+                                        <h3 className="font-semibold text-gray-900">{comment.name}</h3>
+                                        <p className="text-sm text-gray-500">{comment.email}</p>
+                                    </div>
+                                </div>
+                                <p className="text-gray-700">{comment.comment}</p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            </main>
         </div>
-            </div>
-        </div>
-        
-        </section>
-       
-    </>
-        
     );
 }
