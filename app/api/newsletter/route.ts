@@ -36,7 +36,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
 
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-    console.log(baseUrl, gmail_account);
     // Generate HTML email content
     const generateHtmlEmail = (news: any[], blogs: any[]) => {
         const newsItems = news
@@ -113,17 +112,17 @@ export async function GET(req: NextRequest, res: NextResponse) {
             html: emailContent,
         };
 
-        await new Promise((resolve, reject) => {
-            transporter.sendMail(mailOptions, function (error: any, info: any) {
-                if (error) {
-                    console.log(error);
-                    reject(error);
-                } else {
-                    console.log("Email sent: " + info.response);
-                    resolve(info);
-                }
+        try {
+            await transporter.sendMail({
+                from: 'me@me.com',
+                to: subscriber.email,
+                subject: "Top 3 News and Blogs",
+                html: emailContent,
             });
-        });
+            console.log('Email sent to ' + subscriber.email);
+        } catch (e) {
+            console.error('Error sending email to ' + subscriber.email, e);
+        }
     }
 
     return new Response("Emails sent successfully", { status: 200 });
