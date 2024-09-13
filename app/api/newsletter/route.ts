@@ -1,7 +1,8 @@
 import { getNews, getProjects, getSubscribedEmails } from "@/sanity/sanity-utils";
+import { NextApiRequest, NextApiResponse } from "next";
 import nodemailer from "nodemailer";
 
-export async function GET(req: Request, res: Response) {
+export async function GET(req: NextApiRequest, res: NextApiResponse) {
     const _news = await getNews();
     const _blogs = await getProjects();
     const _subscribed = await getSubscribedEmails();
