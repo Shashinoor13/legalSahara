@@ -4,6 +4,7 @@ import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 import Navbar from "../components/nav-bar";
 import BlogDetail from "../components/blog-component";
+import Footer from "../components/footer";
 
 export default async function Home() {
   const projects = await getProjects();
@@ -26,6 +27,7 @@ export default async function Home() {
           </div>
         </section>
       </div>
+      <Footer />
     </>
   );
 }

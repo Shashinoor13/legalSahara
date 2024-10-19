@@ -60,7 +60,7 @@ export function Jumbotron() {
                         ref={ref} id="flex  info-popup" className=" overflow-y-auto overflow-x-hidden z-50 backdrop-blur-sm w-full h-full flex items-center justify-center">
                         <div className="relative p-4 w-full max-w-lg h-full md:h-auto">
                             <div
-                                className="relative bg-gradient-to-b from-green-100 to-white  p-4 rounded-lg shadow  md:p-8">
+                                className="relative bg-gradient-to-b from-green-100 to-white bg-white  p-4 rounded-lg shadow  md:p-8">
                                 <button
                                     onClick={toggleModal}
                                     className="absolute top-0 right-0 p-4 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300"
