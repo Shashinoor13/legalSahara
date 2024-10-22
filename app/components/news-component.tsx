@@ -1,4 +1,5 @@
 import { getNews } from "@/sanity/sanity-utils";
+import { ArrowRight } from "lucide-react";
 
 interface News {
     title: string;
@@ -24,9 +25,11 @@ export default async function NewsList() {
                                 href={item.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-300"
                             >
-                                Read More
+                                <div className="flex items-center text-green-600 font-medium">
+                                    Read More
+                                    <ArrowRight className="w-4 h-4 ml-2" />
+                                </div>
                             </a>
                         </div>
                     </div>

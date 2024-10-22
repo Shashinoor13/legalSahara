@@ -6,14 +6,16 @@ import { ContactForm } from '../components/contact-form';
 import Navbar from '../components/nav-bar';
 import Footer from '../components/footer';
 import NewsList from '../components/news-component';
+import ResourcesList from '../components/resource-component';
 
 const LandingPage: React.FC = () => {
     return (
         <>
             <Navbar />
             <Jumbotron />
-            <RecentBlogs />
+            <ResourcesList />
             <NewsList />
+            <RecentBlogs />
             <Services />
             <ContactForm />
             <Footer />

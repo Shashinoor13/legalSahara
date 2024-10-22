@@ -130,6 +130,15 @@ export default function Lawyers() {
                           <Phone className="w-5 h-5 mr-2" />
                           <span><strong>Phone:</strong> {lawyer.phoneNumber || 'N/A'}</span>
                         </p>
+                        <a
+                          href={`mailto:${lawyer.email}`}
+                          className="mt-4 inline-block w-full"
+                        >
+                          <Button className="w-full bg-blue-500 hover:bg-blue-600 text-white flex items-center justify-center gap-2">
+                            <Mail className="w-4 h-4" />
+                            Get in Touch
+                          </Button>
+                        </a>
                       </div>
                     </div>
                     <div className="md:w-2/3 mt-6 md:mt-0">

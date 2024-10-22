@@ -282,3 +282,26 @@ export async function unsubscribeEmail(email: string) {
     await client.delete(data[0]._id);
     return { message: "Email unsubscribed successfully" };
 }
+
+export async function getResources() {
+    const client = createClient({
+        projectId: 's29n91p9',
+        dataset: 'production',
+        apiVersion: '2023-09-09',
+        useCdn: false,
+    });
+
+    const data = await client.fetch(
+        groq`*[_type == "resource"]{
+            _id,
+            _createdAt,
+            title,
+            description,
+            link,
+            "slug": slug.current,
+            "image": image.asset->url,
+            "file": file.asset->url,
+        }`
+    );
+    return data;
+}
