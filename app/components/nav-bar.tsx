@@ -15,7 +15,11 @@ const navigation = [
   { name: 'Home', href: '/homepage' },
   { name: 'About Us', href: '/about' },
   { name: 'Blogs', href: '/blogs' },
-  { name: 'Lawyers', href: '/lawyers' }
+  { name: 'Lawyers', href: '/lawyers' },
+  {name:'Resources', href:'/resources'},
+  {name:'News', href:'/news'},
+  {name:'Join Our Team', href:'/join'},
+  {name:'Volunteer', href:'/volunteer'},
 ];
 
 export default function Navbar() {

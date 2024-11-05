@@ -1,4 +1,4 @@
-'usa client'
+'use client'
 
 import { addEmailToNewsletter } from "@/sanity/sanity-utils";
 import { MailIcon } from "@heroicons/react/solid";
@@ -119,14 +119,14 @@ export function Jumbotron() {
                 <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">Legal श्रोत</h1>
                 <p className="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">Learn Law Better.</p>
                 <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-                    <a
+                    <button
                         onClick={toggleModal}
-                        href="#" className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-900">
+                         className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-900">
                         Subscribe to our Newsletter
                         <MailIcon className="w-5 h-5 ml-2" />
-                    </a>
+                    </button>
                     <a href="#contact-section" className="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400">
-                    Ask a Question
+                    Ask us a question
                     </a>
                 </div>
             </div>

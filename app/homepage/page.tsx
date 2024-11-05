@@ -16,7 +16,7 @@ const LandingPage: React.FC = () => {
             <ResourcesList />
             <NewsList />
             <RecentBlogs />
-            <Services />
+            {/*<Services /> */}
             <ContactForm />
             <Footer />
         </>
