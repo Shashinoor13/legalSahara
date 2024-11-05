@@ -14,7 +14,7 @@ export default async function RecentBlogs() {
     <>
       <div className=" px-5 pt-10 mx-auto bg-gradient-to-b from-blue-100 to-white" id='recent-blogs'>
         <div className="flex flex-col text-center w-full">
-          <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Latest Articles</h2>
+          <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Latest Blogs</h2>
         </div>
       </div>
       <section className="text-gray-600 body-font">

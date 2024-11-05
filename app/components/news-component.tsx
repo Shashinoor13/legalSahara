@@ -13,7 +13,7 @@ export default async function NewsList() {
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Latest News</h2>
+            <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Latest legal News</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {news.map((item, index) => (
                     <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105">
