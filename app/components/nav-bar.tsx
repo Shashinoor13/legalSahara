@@ -11,15 +11,15 @@ import {
   faGithub
 } from '@fortawesome/free-brands-svg-icons';
 
+const google_forms_link = "https://docs.google.com/forms/d/e/1FAIpQLSc9sv33XvwsDHVKS63ou3YZaKZzlHyVA6rgmqSBUst1498_Sg/viewform"
 const navigation = [
   { name: 'Home', href: '/homepage' },
   { name: 'About Us', href: '/about' },
-  { name: 'Blogs', href: '/blogs' },
+  { name: 'Articles', href: '/blogs' },
   { name: 'Lawyers', href: '/lawyers' },
-  {name:'Resources', href:'/resources'},
-  {name:'News', href:'/news'},
-  {name:'Join Our Team', href:'/join'},
-  {name:'Volunteer', href:'/volunteer'},
+  { name: 'Resources', href: '/resources' },
+  { name: 'News', href: '/news' },
+  { name: 'Join Our Team', href: google_forms_link, new_tab: true },
 ];
 
 export default function Navbar() {
@@ -30,7 +30,7 @@ export default function Navbar() {
           <div className="max-w-7xl mx-auto px-8 lg:px-12 bg-transparent">
             <div className="flex justify-between h-20">
               <div className="flex items-center">
-                <span className='mr-5'>
+                <span className="mr-5">
                   <Image
                     src="/image-invert.png"
                     alt="Legal Shrot Logo"
@@ -39,20 +39,32 @@ export default function Navbar() {
                   />
                 </span>
 
-                <div className=" hidden md:flex  flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400">
-                  {navigation.map(({ name, href }) => (
-                    <Link legacyBehavior href={href} key={name}>
-                      <button type='button' className='inline-block p-4 text-gray-600 rounded active dark:bg-white-800 dark:text-gray-500 mx-1 hover:text-gray-800'>
-                        <a>
-                          <span>{name}</span>
-                        </a>
-                      </button>
-                    </Link>
+                <div className="hidden md:flex flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+                  {navigation.map(({ name, href, new_tab = false }) => (
+                    new_tab ? (
+                      <a 
+                        key={name}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block p-4 text-gray-600 rounded active dark:bg-white-800 dark:text-gray-500 mx-1 hover:text-gray-800"
+                      >
+                        {name}
+                      </a>
+                    ) : (
+                      <Link 
+                        key={name}
+                        href={href}
+                        className="inline-block p-4 text-gray-600 rounded active dark:bg-white-800 dark:text-gray-500 mx-1 hover:text-gray-800"
+                      >
+                        {name}
+                      </Link>
+                    )
                   ))}
                 </div>
               </div>
 
-              <div className=" flex">
+              <div className="flex">
                 <div className="flex items-center md:hidden">
                   <Disclosure.Button className="inline-flex items-center justify-center rounded-md text-zinc-400 hover:text-zinc-600 duration-300">
                     <span className="sr-only">Open main menu</span>
@@ -69,20 +81,33 @@ export default function Navbar() {
 
           <Disclosure.Panel className="md:hidden border-t-2 border-zinc-200">
             <div className="px-10 py-8 space-y-8">
-              {navigation.map(({ name, href }) => (
-                <Link legacyBehavior href={href} key={name}>
-                  <Disclosure.Button
-                    as="a"
+              {navigation.map(({ name, href, new_tab = false }) => (
+                new_tab ? (
+                  <a
+                    key={name}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="group flex justify-between cursor-pointer"
                   >
                     <span className="text-zinc-600 font-medium group-hover:translate-x-2 duration-300">
                       {name}
                     </span>
                     <ChevronRightIcon className="text-zinc-400 group-hover:text-zinc-600 block h-7 w-7 duration-300" />
-                  </Disclosure.Button>
-                </Link>
+                  </a>
+                ) : (
+                  <Link
+                    key={name}
+                    href={href}
+                    className="group flex justify-between cursor-pointer"
+                  >
+                    <span className="text-zinc-600 font-medium group-hover:translate-x-2 duration-300">
+                      {name}
+                    </span>
+                    <ChevronRightIcon className="text-zinc-400 group-hover:text-zinc-600 block h-7 w-7 duration-300" />
+                  </Link>
+                )
               ))}
-
 
               <div className="flex items-center justify-center space-x-6">
                 <a

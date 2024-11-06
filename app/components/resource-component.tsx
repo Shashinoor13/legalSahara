@@ -12,8 +12,12 @@ interface Resource {
     file: string;
 }
 
-export default async function ResourcesList() {
-    const resources: Resource[] = await getResources();
+
+export default async function ResourcesList({showAll=false}) {
+    let resources: Resource[] = await getResources();
+    if (!showAll) {
+        resources = resources.slice(0, 3);
+    }
 
     return (
         <div className="container mx-auto px-4 py-8">

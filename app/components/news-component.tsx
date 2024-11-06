@@ -8,8 +8,11 @@ interface News {
     link: string;
 }
 
-export default async function NewsList() {
-    const news: News[] = await getNews();
+export default async function NewsList({showAll = false}) {
+    let news: News[] = await getNews();
+    if (!showAll) {
+      news=  news.slice(0, 3);
+    }
 
     return (
         <div className="container mx-auto px-4 py-8">

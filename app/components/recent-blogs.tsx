@@ -1,7 +1,5 @@
 import { getProjects } from "@/sanity/sanity-utils";
-import Image from "next/image";
 import Link from "next/link";
-import { PortableText } from "@portabletext/react";
 import BlogDetail from "./blog-component";
 
 export default async function RecentBlogs() {
@@ -12,7 +10,7 @@ export default async function RecentBlogs() {
   const topBlogs = blogs.slice(0, 3);
   return (
     <>
-      <div className=" px-5 pt-10 mx-auto bg-gradient-to-b from-blue-100 to-white" id='recent-blogs'>
+      <div className=" px-5 pt-10 mx-auto " id='recent-blogs'>
         <div className="flex flex-col text-center w-full">
           <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Latest Blogs</h2>
         </div>
